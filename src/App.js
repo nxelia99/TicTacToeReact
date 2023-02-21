@@ -72,13 +72,11 @@ function App() {
     //async
     const newWinner = checkWinner(newBoard)
     if (newWinner){
-      setWinner(() => {
-        console.log(`Ganador: ${newWinner}, el anterior era: ${previewQinner}`)
-        return newWinner
-      })
+        setWinner(newWinner)
+      } // check if the game is over
+
     }
   
-  }
 
 
   return (
@@ -107,6 +105,27 @@ function App() {
           {TURNS.X} </Square>
         <Square isSelected={turn === TURNS.O}>{TURNS.O}</Square>
       </section>
+
+      {
+        winner != null && (
+          <section className='winner'>
+            <div className='text'>
+              <h2>
+                {
+                  winner === false
+                    ? 'Empate'
+                    : 'Ganó'
+                }
+              </h2>
+              <header className='win'>
+                {winner && <Square>{winner}</Square>}
+              </header>
+
+              <footer><button>Empezar de nuevo</button></footer>
+            </div>
+          </section>
+        )
+      }
     </main>
   );
 }
